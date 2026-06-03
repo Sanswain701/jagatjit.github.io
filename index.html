@@ -17,7 +17,9 @@ body{
 font-family:system-ui,sans-serif;
 background:#041531;
 color:white;
-transition:.4s;
+transition:
+background-color .8s ease,
+color .8s ease;
 }
 
 body.light{
@@ -58,7 +60,10 @@ height:180px;
 object-fit:cover;
 border-radius:50%;
 border:4px solid rgba(255,255,255,.15);
-box-shadow:0 0 25px rgba(0,120,255,.5);
+box-shadow:
+0 0 20px rgba(0,120,255,.5),
+0 0 40px rgba(0,120,255,.4),
+0 0 70px rgba(0,120,255,.3);
 }
 
 h1{
@@ -245,10 +250,10 @@ document.body.classList.toggle("light");
 
 const btn=document.getElementById("themeBtn");
 
-btn.innerHTML=
+btn.innerHTML =
 document.body.classList.contains("light")
-? "☀️"
-: "🌙";
+? "☀"
+: "☾";
 
 const dancer=document.getElementById("danceGirl");
 
