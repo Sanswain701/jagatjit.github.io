@@ -85,6 +85,37 @@ border-radius:20px;
 background:rgba(255,255,255,.05);
 border:1px solid rgba(255,255,255,.08);
 }
+  #dancer{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+font-size:120px;
+opacity:0;
+pointer-events:none;
+z-index:9999;
+}
+
+.show-dancer{
+animation:dancePop 1.8s ease;
+}
+
+@keyframes dancePop{
+0%{
+opacity:0;
+transform:translate(-50%,-50%) scale(.5);
+}
+20%{
+opacity:1;
+}
+80%{
+opacity:1;
+}
+100%{
+opacity:0;
+transform:translate(-50%,-50%) scale(1.2);
+}
+}
 
 .location{
 margin-top:30px;
