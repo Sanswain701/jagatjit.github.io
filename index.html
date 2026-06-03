@@ -176,10 +176,6 @@ height:70px;
 
 <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙</button>
 
-<div id="danceGirl">
-<img src="dance.gif">
-</div>
-
 <div class="container">
 
 <img src="images.jpeg" class="profile">
@@ -254,14 +250,6 @@ btn.innerHTML =
 document.body.classList.contains("light")
 ? "☀"
 : "☾";
-
-const dancer=document.getElementById("danceGirl");
-
-dancer.style.display="block";
-
-setTimeout(()=>{
-dancer.style.display="none";
-},1800);
 
 }
 
