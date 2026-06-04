@@ -7,10 +7,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script>
-alert("TEST 999");
-</script>
-    
 <style>
 body{
     margin:0;
@@ -46,13 +42,7 @@ h1{
 .loading{
     text-align:center;
     margin-top:20px;
-    font-size:18px;
-}
-
-.error{
-    color:#ff6b6b;
-    text-align:center;
-    margin-top:20px;
+    font-size:20px;
 }
 </style>
 </head>
@@ -67,85 +57,85 @@ h1{
 
 <div id="gallery" class="gallery"></div>
 
-<div id="error" class="error"></div>
-
 <script>
 
-document.getElementById("loading").innerHTML = "JS Loaded";
+alert("TEST 999");
 
-const supabaseUrl =
+alert("window.supabase = " + typeof window.supabase);
+
+const SUPABASE_URL =
 "https://yycgbleogwoifemxjczb.supabase.co";
 
-const supabaseKey =
+const SUPABASE_KEY =
 "sb_publishable_RYCEcdZrHw1PBv27E33atQ_UwV0QDUa";
+
+alert("Before createClient");
 
 const supabase =
 window.supabase.createClient(
-    supabaseUrl,
-    supabaseKey
+    SUPABASE_URL,
+    SUPABASE_KEY
 );
 
-async function loadGallery() {
+alert("After createClient");
 
-    const gallery = document.getElementById("gallery");
-    const loading = document.getElementById("loading");
-    const errorBox = document.getElementById("error");
+async function loadGallery(){
 
-    loading.innerHTML = "Connecting Supabase...";
+    const loading =
+    document.getElementById("loading");
 
-    try {
+    const gallery =
+    document.getElementById("gallery");
 
-        const result = await supabase
-            .storage
-            .from("gallery")
-            .list("", { limit: 100 });
+    loading.innerHTML =
+    "Connecting Supabase...";
 
-        console.log(result);
+    alert("Before list()");
 
-        loading.innerHTML = "Files Found: " +
-        (result.data ? result.data.length : 0);
+    const result =
+    await supabase.storage
+    .from("gallery")
+    .list("", { limit: 100 });
 
-        if(result.error){
-            errorBox.innerHTML =
-            "Supabase Error: " +
-            result.error.message;
-            return;
-        }
+    alert("After list()");
 
-        gallery.innerHTML = "";
+    console.log(result);
 
-        result.data.forEach(file => {
+    if(result.error){
 
-            const img =
-            document.createElement("img");
+        loading.innerHTML =
+        "ERROR: " +
+        result.error.message;
 
-            img.src =
-            supabaseUrl +
-            "/storage/v1/object/public/gallery/" +
-            encodeURIComponent(file.name);
+        alert(
+        "ERROR: " +
+        result.error.message
+        );
 
-            img.onerror = () => {
-                console.log(
-                    "Failed:",
-                    file.name
-                );
-            };
-
-            gallery.appendChild(img);
-
-        });
-
-        loading.style.display = "none";
-
-    } catch(err){
-
-        console.error(err);
-
-        errorBox.innerHTML =
-        "Catch Error: " + err.message;
-
+        return;
     }
 
+    loading.style.display =
+    "none";
+
+    result.data.forEach(file => {
+
+        const img =
+        document.createElement("img");
+
+        img.src =
+        SUPABASE_URL +
+        "/storage/v1/object/public/gallery/" +
+        encodeURIComponent(file.name);
+
+        gallery.appendChild(img);
+
+    });
+
+    alert(
+    "Loaded files: " +
+    result.data.length
+    );
 }
 
 loadGallery();
