@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gallery</title>
-
-<style>
+<title>Gallery</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>
 body{
     margin:0;
     padding:20px;
@@ -16,13 +13,19 @@ body{
 
 h1{
     text-align:center;
-    margin-bottom:20px;
+}
+
+.back{
+    color:white;
+    text-decoration:none;
+    font-size:18px;
 }
 
 .gallery{
     display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+    grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
     gap:12px;
+    margin-top:20px;
 }
 
 .gallery img{
@@ -30,29 +33,46 @@ h1{
     border-radius:12px;
     display:block;
 }
+</style></head><body><a href="index.html" class="back">← Back</a>
 
-.back{
-    display:inline-block;
-    margin-bottom:20px;
-    color:white;
-    text-decoration:none;
+<h1>Gallery</h1><div class="gallery" id="gallery"></div><script>
+const supabase = window.supabase.createClient(
+  "https://yycgbleogwoifemxjczb.supabase.co",
+  "sb_publishable_RYCEcdZrHw1PBv27E33atQ_UwV0QDUa"
+);
+
+async function loadGallery() {
+
+  const { data, error } = await supabase
+    .storage
+    .from("gallery")
+    .list("", {
+      limit: 100
+    });
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  const gallery = document.getElementById("gallery");
+  gallery.innerHTML = "";
+
+  data.forEach(file => {
+
+    const url =
+      "https://yycgbleogwoifemxjczb.supabase.co/storage/v1/object/public/gallery/" +
+      file.name;
+
+    const img = document.createElement("img");
+    img.src = url;
+
+    gallery.appendChild(img);
+
+  });
+
 }
-</style>
-</head>
 
-<body>
-
-<a href="index.html" class="back">← Back</a>
-
-<h1>Gallery</h1>
-
-<div class="gallery" id="gallery">
-
-<img src="https://picsum.photos/400?1">
-<img src="https://picsum.photos/400?2">
-<img src="https://picsum.photos/400?3">
-
-</div>
-
-</body>
+loadGallery();
+</script></body>
 </html>
