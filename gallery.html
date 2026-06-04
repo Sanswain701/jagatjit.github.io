@@ -62,15 +62,20 @@ async function loadGallery() {
   gallery.innerHTML = "";
 
   data.forEach(file => {
+console.log(file.name);
 
     const url =
       "https://yycgbleogwoifemxjczb.supabase.co/storage/v1/object/public/gallery/" +
       file.name;
 
     const img = document.createElement("img");
-    img.src = url;
+img.src = url;
 
-    gallery.appendChild(img);
+img.onerror = () => {
+  console.log("Image failed:", url);
+};
+
+gallery.appendChild(img);
 
   });
 
