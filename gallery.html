@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gallery</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 body{
@@ -16,12 +18,13 @@ body{
 
 h1{
     text-align:center;
+    margin-top:20px;
 }
 
 .back{
     color:white;
     text-decoration:none;
-    font-size:18px;
+    font-size:20px;
 }
 
 .gallery{
@@ -45,15 +48,55 @@ h1{
 
 <h1>Gallery</h1>
 
-<div class="gallery">
-
-<img src="https://yycgbleogwoifemxjczb.supabase.co/storage/v1/object/public/gallery/IMG-20260423-WA0055.jpg">
-
-<img src="https://yycgbleogwoifemxjczb.supabase.co/storage/v1/object/public/gallery/IMG-20260423-WA0056.jpg">
-
-<img src="https://yycgbleogwoifemxjczb.supabase.co/storage/v1/object/public/gallery/IMG_20260603_170025_595.webp">
-
+<div class="gallery" id="gallery">
+Loading...
 </div>
+
+<script>
+
+const supabase = window.supabase.createClient(
+    "https://yycgbleogwoifemxjczb.supabase.co",
+    "sb_publishable_RYCEcdZrHw1PBv27E33atQ_UwV0QDUa"
+);
+
+async function loadGallery() {
+
+    const gallery = document.getElementById("gallery");
+
+    const { data, error } = await supabase
+        .storage
+        .from("gallery")
+        .list("", { limit: 100 });
+
+    if (error) {
+        gallery.innerHTML = "Gallery load error";
+        console.error(error);
+        return;
+    }
+
+    gallery.innerHTML = "";
+
+    data.forEach(file => {
+
+        if (!file.name.match(/\.(jpg|jpeg|png|webp|gif)$/i)) {
+            return;
+        }
+
+        const img = document.createElement("img");
+
+        img.src =
+        "https://yycgbleogwoifemxjczb.supabase.co/storage/v1/object/public/gallery/" +
+        encodeURIComponent(file.name);
+
+        gallery.appendChild(img);
+
+    });
+
+}
+
+loadGallery();
+
+</script>
 
 </body>
 </html>
