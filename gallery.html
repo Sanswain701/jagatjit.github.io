@@ -80,8 +80,10 @@ async function loadGallery() {
       .from("gallery")
       .list("", { limit: 100 });
 
+    alert("Files found: " + (data ? data.length : 0));
+
     if (error) {
-      loading.innerHTML = error.message;
+      loading.innerHTML = "ERROR: " + error.message;
       return;
     }
 
@@ -92,16 +94,24 @@ async function loadGallery() {
       const img = document.createElement("img");
 
       img.src =
-        "https://yycgbleogwoifemxjczb.supabase.co/storage/v1/object/public/gallery/" +
-        encodeURIComponent(file.name);
+      "https://yycgbleogwoifemxjczb.supabase.co/storage/v1/object/public/gallery/" +
+      encodeURIComponent(file.name);
+
+      img.onerror = () => {
+        console.log("Failed:", file.name);
+      };
 
       gallery.appendChild(img);
 
     });
 
   } catch (e) {
-    loading.innerHTML = e.message;
+
+    loading.innerHTML = "JS ERROR: " + e.message;
+    alert("JS ERROR: " + e.message);
+
   }
+
 }
 
 loadGallery();
