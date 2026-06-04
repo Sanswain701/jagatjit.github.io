@@ -1,8 +1,11 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gallery</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>
+<title>Gallery</title>
+
+<style>
 body{
     margin:0;
     padding:20px;
@@ -33,54 +36,20 @@ h1{
     border-radius:12px;
     display:block;
 }
-</style></head><body><a href="index.html" class="back">← Back</a>
+</style>
+</head>
 
-<h1>Gallery</h1><div class="gallery" id="gallery"></div>
+<body>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-const supabase = window.supabase.createClient(
-  "https://yycgbleogwoifemxjczb.supabase.co",
-  "sb_publishable_RYCEcdZrHw1PBv27E33atQ_UwV0QDUa"
-);
+<a href="index.html" class="back">← Back</a>
 
-async function loadGallery() {
+<h1>Gallery</h1>
 
-  const { data, error } = await supabase
-    .storage
-    .from("gallery")
-    .list("", {
-      limit: 100
-    });
+<div class="gallery">
 
-  if (error) {
-    console.error(error);
-    return;
-  }
+<img src="https://yycgbleogwoifemxjczb.supabase.co/storage/v1/object/public/gallery/IMG_20260603_170025_595.webp">
 
-  const gallery = document.getElementById("gallery");
-  gallery.innerHTML = "";
+</div>
 
-  data.forEach(file => {
-console.log(file.name);
-
-    const url =
-      "https://yycgbleogwoifemxjczb.supabase.co/storage/v1/object/public/gallery/" +
-      file.name;
-
-    const img = document.createElement("img");
-img.src = url;
-
-img.onerror = () => {
-  console.log("Image failed:", url);
-};
-
-gallery.appendChild(img);
-
-  });
-
-}
-
-loadGallery();
-</script></body>
+</body>
 </html>
