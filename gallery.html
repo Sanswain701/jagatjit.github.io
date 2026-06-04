@@ -5,10 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gallery</title>
 
-<script>
-alert("JS Working");
-</script>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
@@ -70,6 +66,8 @@ const supabase = window.supabase.createClient(
     "sb_publishable_RYCEcdZrHw1PBv27E33atQ_UwV0QDUa"
 );
 
+console.log(window.supabase);
+alert("Supabase Loaded");
 async function loadGallery(){
 
     const gallery = document.getElementById("gallery");
