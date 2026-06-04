@@ -17,16 +17,7 @@ body{
 font-family:system-ui,sans-serif;
 background:#041531;
 color:white;
-transition:
-background-color .8s ease,
-color .8s ease;
-}
-
-.gallery-icon{
-    width:42px;
-    height:42px;
-    border-radius:12px;
-    object-fit:cover;
+transition:background-color .8s ease,color .8s ease;
 }
 
 body.light{
@@ -100,9 +91,9 @@ margin-bottom:25px;
 .socials{
 margin-top:40px;
 display:grid;
-grid-template-columns:repeat(4,1fr);
+grid-template-columns:repeat(5,1fr);
 gap:15px;
-max-width:420px;
+max-width:520px;
 margin-left:auto;
 margin-right:auto;
 }
@@ -130,15 +121,23 @@ width:42px;
 height:42px;
 }
 
+.gallery-icon{
+width:42px;
+height:42px;
+border-radius:12px;
+object-fit:cover;
+}
+
 .location{
 margin-top:35px;
-font-size:1.2rem;
+font-size:1rem;
 opacity:.9;
+white-space:nowrap;
 }
 
 .clock{
 margin-top:10px;
-font-size:1.15rem;
+font-size:1.05rem;
 }
 
 @media(max-width:600px){
@@ -153,14 +152,33 @@ height:150px;
 }
 
 .socials{
-max-width:350px;
+grid-template-columns:repeat(5,1fr);
+gap:10px;
+max-width:100%;
 }
 
 .socials a{
-width:70px;
-height:70px;
+width:60px;
+height:60px;
 }
 
+.socials img{
+width:34px;
+height:34px;
+}
+
+.gallery-icon{
+width:34px;
+height:34px;
+}
+
+.location{
+font-size:.9rem;
+}
+
+.clock{
+font-size:.95rem;
+}
 }
 </style>
 </head>
@@ -181,37 +199,21 @@ Learner & Multi-Domain Explorer
 
 <div class="about">
 
-<p>
-Hi, I'm Jagatjit.
-</p>
+<p>Hi, I'm Jagatjit.</p>
 
-<p>
-I'm 20 and spend most of my time exploring ideas, learning new things, and going down random rabbit holes on the internet.
-</p>
+<p>I'm 20 and spend most of my time exploring ideas, learning new things, and going down random rabbit holes on the internet.</p>
 
-<p>
-Most days you'll find me experimenting with projects, reading about things I barely understood yesterday, or working on ideas that seem interesting enough to chase.
-</p>
+<p>Most days you'll find me experimenting with projects, reading about things I barely understood yesterday, or working on ideas that seem interesting enough to chase.</p>
 
-<p>
-I'm interested in technology, business, communities, and building things that people actually enjoy using. Right now, I'm focused on learning, improving my skills, and figuring out how ideas turn into real-world products.
-</p>
+<p>I'm interested in technology, business, communities, and building things that people actually enjoy using. Right now, I'm focused on learning, improving my skills, and figuring out how ideas turn into real-world products.</p>
 
-<p>
-Outside of that, I enjoy traveling, trying good food, meeting new people, and collecting experiences along the way. I care more about memorable experiences than owning more stuff.
-</p>
+<p>Outside of that, I enjoy traveling, trying good food, meeting new people, and collecting experiences along the way. I care more about memorable experiences than owning more stuff.</p>
 
-<p>
-One long-term goal of mine is to build multiple businesses, including a café concept called Brew & Bean. Whether it works out exactly as planned or not, I'm excited to see where the journey leads.
-</p>
+<p>One long-term goal of mine is to build multiple businesses, including a café concept called Brew & Bean. Whether it works out exactly as planned or not, I'm excited to see where the journey leads.</p>
 
-<p>
-For now, I'm just learning, building, and taking things one step at a time.
-</p>
+<p>For now, I'm just learning, building, and taking things one step at a time.</p>
 
-<p>
-If you're here, chances are we'd have something interesting to talk about.
-</p>
+<p>If you're here, chances are we'd have something interesting to talk about.</p>
 
 </div>
 
@@ -230,9 +232,9 @@ If you're here, chances are we'd have something interesting to talk about.
 </a>
 
 <a href="gallery.html">
-   <img src="gallery-icon.png" alt="Gallery" class="gallery-icon">
+<img src="gallery-icon.png" alt="Gallery" class="gallery-icon">
 </a>
-  
+
 <a href="https://brew-bean-refine--hellobrewbean.replit.app/" target="_blank">
 <img src="https://cdn-icons-png.flaticon.com/512/924/924514.png">
 </a>
@@ -255,11 +257,10 @@ document.body.classList.toggle("light");
 
 const btn=document.getElementById("themeBtn");
 
-btn.innerHTML =
+btn.innerHTML=
 document.body.classList.contains("light")
 ? "☀"
 : "☾";
-
 }
 
 function updateClock(){
@@ -276,11 +277,9 @@ minute:'2-digit'
 
 document.getElementById("clock").innerHTML=
 time + " IST";
-
 }
 
 updateClock();
-
 setInterval(updateClock,1000);
 
 </script>
